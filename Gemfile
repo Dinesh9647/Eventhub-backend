@@ -46,6 +46,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.12'
 gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'figaro', '~> 1.2'
 gem 'pundit', '~> 1.1'
+gem 'rack-cors', '~> 1.1', '>= 1.1.1'
 # gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 
 # Use Sass to process CSS

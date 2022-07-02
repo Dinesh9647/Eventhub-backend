@@ -141,6 +141,8 @@ GEM
       activesupport (>= 3.0.0)
     racc (1.6.0)
     rack (2.2.3.1)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.3)
@@ -232,6 +234,7 @@ DEPENDENCIES
   jwt (~> 1.5, >= 1.5.4)
   puma (~> 5.0)
   pundit (~> 1.1)
+  rack-cors (~> 1.1, >= 1.1.1)
   rails (~> 7.0.3)
   selenium-webdriver
   sprockets-rails
