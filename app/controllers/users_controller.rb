@@ -7,7 +7,8 @@ class UsersController < ApplicationController
         if @user.role != "user"
             return render json: { errors: [ "Access denied" ] }, status: :forbidden
         elsif @user.save
-            return render json: {
+            token = JsonWebToken.encode(user_id: @user.id)
+            return render json: { token: token,
                 user: @user.as_json(except: :password_digest)
             }, status: :created
         else 
