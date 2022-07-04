@@ -19,13 +19,13 @@ class EventsController < ApplicationController
         end
 
         # Pagination
-        page = params.has_key?(:page) ? params[:page].to_i : 1
-        perPage = params.has_key?(:perPage) ? params[:perPage].to_i : 20
-        totalCount = @events.length()
-        totalPages = (totalCount.to_f / perPage).ceil()
-        page = [page, totalPages].min
-        skip = (page - 1) * perPage
-        @events = @events.limit(perPage).offset(skip)
+        # page = params.has_key?(:page) ? params[:page].to_i : 1
+        # perPage = params.has_key?(:perPage) ? params[:perPage].to_i : 20
+        # totalCount = @events.length()
+        # totalPages = (totalCount.to_f / perPage).ceil()
+        # page = [page, totalPages].min
+        # skip = (page - 1) * perPage
+        # @events = @events.limit(perPage).offset(skip)
         eventsWithTags = Array.new
         @events.each do |event|
             eventsWithTags.push({ event: event, tags: event.tags })
@@ -33,12 +33,12 @@ class EventsController < ApplicationController
 
         render json: { 
             events: eventsWithTags,
-            page: page,
-            perPage: perPage,
-            totalCount: totalCount,
-            totalPages: totalPages,
-            hasPrev: page > 1,
-            hasNext:  page < totalPages
+            # page: page,
+            # perPage: perPage,
+            # totalCount: totalCount,
+            # totalPages: totalPages,
+            # hasPrev: page > 1,
+            # hasNext:  page < totalPages
         }, status: :ok
     end
 
