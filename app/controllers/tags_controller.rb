@@ -1,5 +1,5 @@
 class TagsController < ApplicationController
-    before_action :current_user
+    before_action :current_user, except: :index
     wrap_parameters :tag, include: [:phrase]
 
     def index
