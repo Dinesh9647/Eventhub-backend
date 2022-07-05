@@ -15,7 +15,8 @@ class EventsController < ApplicationController
             @events = @events.where("reg_end >= ?", current)
         end
         if params.has_key?(:tags)
-            @events = @events.joins(:event_tags).distinct.where("event_tags.tag_id IN (?)", params[:tags])
+            paramTags = params[:tags].split(',');
+            @events = @events.joins(:event_tags).distinct.where("event_tags.tag_id IN (?)", paramTags)
         end
 
         # Pagination
