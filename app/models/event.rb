@@ -3,7 +3,7 @@ class Event < ApplicationRecord
     has_many :users, through: :registrations
     has_many :event_tags, dependent: :destroy
     has_many :tags, through: :event_tags
-    has_one_base64_attached :image
+    has_one_attached :image
 
     validate :reg_start_is_valid_datetime,
     :reg_end_is_valid_datetime

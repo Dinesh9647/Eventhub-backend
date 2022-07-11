@@ -50,7 +50,7 @@ class EventsController < ApplicationController
     def create
         # byebug
         @event = Event.new(event_params)
-        @event.image.attach(data: params[:image])
+        # @event.image.attach(data: params[:image])
         authorize @event
         if @event.save
             @event.url = url_for(@event.image)
@@ -118,6 +118,6 @@ class EventsController < ApplicationController
 
     def event_params
         # byebug
-        params.permit(:title, :description, :reg_start, :reg_end, :fees, :venue, :category)
+        params.require(:event).permit(:title, :description, :reg_start, :reg_end, :fees, :venue, :category, :image)
     end
 end
