@@ -64,6 +64,14 @@ class UsersController < ApplicationController
         end
     end
 
+    def bucket
+        if params[:id].to_i != current_user.id
+            return render json: { errors: ["Access denied"] }, status: :forbidden
+        end
+        @user = User.find(params[:id])
+        render json: { registrations: @user.registrations }, status: :ok
+    end
+
     private
 
     def user_params

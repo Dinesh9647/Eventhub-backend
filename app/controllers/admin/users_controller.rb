@@ -46,6 +46,17 @@ class Admin::UsersController < ApplicationController
         end
     end
 
+    def events
+        @user = User.find(params[:id])
+        authorize @user, :can_getall?
+        @events = Event.all.order(reg_end: :asc)
+        eventsWithTags = Array.new
+        @events.each do |event|
+            eventsWithTags.push({ event: event, tags: event.tags })
+        end
+        render json: { events: eventsWithTags }, status: :ok
+    end
+
     private
 
     def admin_params

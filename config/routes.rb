@@ -9,10 +9,13 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :users, only: [:create, :show, :update, :destroy] do
     post 'register', on: :member
+    get 'bucket', on: :member
   end
   resources :tags, only: [:index, :create, :update, :destroy]
   namespace :admin do
-    resources :users, only: [:create, :show, :update, :destroy]
+    resources :users, only: [:create, :show, :update, :destroy] do
+      get 'events', on: :member
+    end
   end
   post '/auth/login', to: 'authentication#login'
   post '/auth/admin/login', to: 'authentication#adminlogin'

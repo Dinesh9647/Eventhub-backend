@@ -47,6 +47,8 @@ gem 'jwt', '~> 1.5', '>= 1.5.4'
 gem 'figaro', '~> 1.2'
 gem 'pundit', '~> 1.1'
 gem 'rack-cors', '~> 1.1', '>= 1.1.1'
+gem 'byebug', '~> 9.0', '>= 9.0.6'
+gem 'active_storage_base64', '~> 2.0'
 # gem 'will_paginate', '~> 3.3', '>= 3.3.1'
 
 # Use Sass to process CSS

@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-    before_action :current_user
+    before_action :current_user, except: [:index, :show]
     wrap_parameters :event, include: [:title, :description, :reg_start, :reg_end, :fees, :venue, :category, :image]
 
     def index
@@ -29,7 +29,11 @@ class EventsController < ApplicationController
         # @events = @events.limit(perPage).offset(skip)
         eventsWithTags = Array.new
         @events.each do |event|
-            eventsWithTags.push({ event: event, tags: event.tags })
+            if sub_category == "Archived" 
+                eventsWithTags.push({ event: event, tags: event.tags, active: false })
+            else
+                eventsWithTags.push({ event: event, tags: event.tags, active: true })
+            end
         end
 
         render json: { 
@@ -44,7 +48,9 @@ class EventsController < ApplicationController
     end
 
     def create
+        # byebug
         @event = Event.new(event_params)
+        @event.image.attach(data: params[:image])
         authorize @event
         if @event.save
             @event.url = url_for(@event.image)
@@ -60,8 +66,8 @@ class EventsController < ApplicationController
 
     def show
         @event = Event.find(params[:id])
-        puts @event.tags
-        render json: { event: @event, tags: @event.tags }, status: :ok
+        # puts @event.tags
+        render json: { eventTags: { event: @event, tags: @event.tags }}, status: :ok
     end
 
     def update
@@ -111,6 +117,7 @@ class EventsController < ApplicationController
     private
 
     def event_params
-        params.require(:event).permit(:title, :description, :reg_start, :reg_end, :fees, :venue, :category, :image)
+        # byebug
+        params.permit(:title, :description, :reg_start, :reg_end, :fees, :venue, :category)
     end
 end

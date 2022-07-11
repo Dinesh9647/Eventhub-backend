@@ -23,5 +23,8 @@ class UserPolicy < ApplicationPolicy
     def can_destroy?
         user.role == "super" or (user.role == "admin" and record == user)
     end
+    def can_getall?
+        (user.role == "super" or user.role == "admin") and record == user
+    end
 end
 

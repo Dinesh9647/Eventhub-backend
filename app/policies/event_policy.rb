@@ -10,7 +10,7 @@ class EventPolicy < ApplicationPolicy
     end
     def register?
         current = DateTime.current()
-        current >= record.reg_start and current <= record.reg_end and user.role == "user"
+        current <= record.reg_end and user.role == "user"
     end
     def tags?
         user.role == "super" or user.role == "admin"
